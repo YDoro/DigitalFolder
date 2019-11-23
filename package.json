@@ -1,0 +1,19 @@
+{
+  "name": "digital_folder",
+  "version": "1.0.0",
+  "description": "development challenge",
+  "main": "index.js",
+  "author": "Yan Mello ",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "consign": "^0.1.6",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.0",
+    "mongoose": "^4.8.5",
+    "path": "^0.12.7",
+    "validator": "^12.1.0"
+  }
+}
