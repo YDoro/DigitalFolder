@@ -8,8 +8,5 @@ module.exports = (app)=>{
     app.get('/register',(req,res)=>{
         app.app.controllers.index.register(app,req,res);
     })
-    app.post('/register',(req,res)=>{
-        //TODO register logic
-        res.send("chegou")
-    })
+
 }

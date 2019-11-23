@@ -1,5 +1,6 @@
 module.exports = (app)=>{
-    app.get('/user',(req,res)=>{
-        res.send('User is OK!')
+    app.post('/user/register',(req,res)=>{
+            app.app.controllers.user.register(app,req,res);
+        
     })
 }

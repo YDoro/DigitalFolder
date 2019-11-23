@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 module.exports.home = (app,req,res)=>{
-    res.render('../views/home',{errors:{},data:{}})
+    res.render('../views/home',{error:false,data:{}})
 }
 module.exports.login =async (app,req,res)=>{
    const user  = await User.findOne({email:req.body.email});
