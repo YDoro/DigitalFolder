@@ -1,9 +1,9 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 module.exports.register = async (app, req, res) => {
-    //TODO redirect to home with messages
+    const {email,name,password}=req.body;
     await User.create({email, name, password}).then(()=>{
-        res.status(201).send('successfully registered!')
+        res.render('../views/login',{error:null,data:'successfully registered!'})
     }).catch(err=>console.log(err))
 };
 module.exports.login = async (app,req,res)=>{

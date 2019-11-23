@@ -3,14 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <style>
-    .container,#formContainer{
-    padding-top: 2%;
-    padding-bottom: 2%;
-    align-self: center;
-    background-color: lightblue;
-    width: 40%; 
-}
- </style>
+      .container,
+      #formContainer {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        align-self: center;
+        background-color: lightblue;
+        width: 40%;
+      }
+    </style>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -44,14 +45,19 @@
   </head>
   <body>
     <div class="container" id="formContainer">
-            <div>
-                    <% if(error){ %>
-                        <div class="alert alert-danger">
-                            <strong>Error!</strong>
-                           <p> <%=error %></p>
-                        </div>
-                        <%}%>
-                </div>
+      <div>
+        <% if(data){ %>
+        <div class="alert alert-success" role="alert">
+          <strong>Success!</strong>
+          <p><%=data %></p>
+        </div>
+        <%}%> <% if(error){ %>
+        <div class="alert alert-danger">
+          <strong>Error!</strong>
+          <p><%=error %></p>
+        </div>
+        <%}%>
+      </div>
       <form action="/auth/login" method="POST">
         <div class="form-group">
           <label for="emailInput">Email</label>
@@ -73,14 +79,12 @@
             placeholder="Password"
           />
         </div>
-      
-          <button type="submit" class="btn btn-primary">LogIn</button>
-          <button type="button" class="btn btn-light" onclick="register()">
-            Register
-          </button>
-        
+
+        <button type="submit" class="btn btn-primary">LogIn</button>
+        <button type="button" class="btn btn-light" onclick="register()">
+          Register
+        </button>
       </form>
     </div>
-
   </body>
 </html>

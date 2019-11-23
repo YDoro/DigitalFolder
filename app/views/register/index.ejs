@@ -2,8 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="css/home.css" />
-
+    <style>
+      .container,
+      #formContainer {
+        padding-top: 2%;
+        padding-bottom: 2%;
+        align-self: center;
+        background-color: lightblue;
+        width: 40%;
+      }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
@@ -27,7 +35,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <title>Home</title>
+    <title>Register</title>
   </head>
   <body>
     <div class="container" id="formContainer">
@@ -39,18 +47,18 @@
         </div>
         <%}%>
       </div>
-  
+
       <form action="/user/register" method="POST">
         <div class="form-group">
-            <label for="nameInput">Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="nameInput"
-              name="name"
-              placeholder="Name"
-            />
-          </div>
+          <label for="nameInput">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nameInput"
+            name="name"
+            placeholder="Name"
+          />
+        </div>
         <div class="form-group">
           <label for="emailInput">Email</label>
           <input
@@ -73,15 +81,15 @@
           />
         </div>
         <div class="form-group">
-                <label for="passwordRetypeInput">Password confirm</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="passwordRetypeInput"
-                  name="password_confirm"
-                  placeholder="Retype password"
-                />
-              </div>
+          <label for="passwordRetypeInput">Password confirm</label>
+          <input
+            type="password"
+            class="form-control"
+            id="passwordRetypeInput"
+            name="password_confirm"
+            placeholder="Retype password"
+          />
+        </div>
 
         <button type="submit" class="btn btn-primary">Register</button>
       </form>
