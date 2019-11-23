@@ -2,7 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="css/home.css" />
+    <style>
+    .container,#formContainer{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    align-self: center;
+    background-color: lightblue;
+    width: 40%; 
+}
+ </style>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -44,7 +52,7 @@
                         </div>
                         <%}%>
                 </div>
-      <form action="/login" method="POST">
+      <form action="/auth/login" method="POST">
         <div class="form-group">
           <label for="emailInput">Email</label>
           <input
