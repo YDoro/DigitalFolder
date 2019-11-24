@@ -1,5 +1,4 @@
 const validator = require("validator");
-
 module.exports = app => {
   app.post("/user/register", (req, res) => {
     const { email, name, password, password_confirm } = req.body;
