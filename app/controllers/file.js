@@ -28,12 +28,11 @@ module.exports.new = async (app, req, res) => {
           content = content + (rows[y] || []).join(" ") + "\n";
         });
       if (content) {
-        await Document.create({
-          name: file.originalFilename,
-          content,
-          user
-        });
-      
+        // await Document.create({
+        //   name: file.originalFilename,
+        //   content,
+        //   user
+        // });
       }
     }
     await fs.readFile(file.path, async (err, data) => {
@@ -43,8 +42,8 @@ module.exports.new = async (app, req, res) => {
           new pdfreader.PdfReader().parseFileItems(file.path, (err, item) => {
             if (item) {
               if (!item || item.page) {
+                console.log(!item, item.page);
                 printRows();
-                rows = {};
               } else if (item.text)
                 (rows[item.y] = rows[item.y] || []).push(item.text);
             }
