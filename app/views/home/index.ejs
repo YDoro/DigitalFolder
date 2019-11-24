@@ -10,6 +10,11 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous"
   />
+  <script>
+    function newDocument() {
+        window.location.href = "/document/create";
+      }
+  </script>
   <script
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -42,20 +47,33 @@
                <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> + </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="#">New File</a>
+                    <a class="dropdown-item" onclick="newDocument()">New Document</a>
                     <a class="dropdown-item" href="#">New Folder</a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
-    
-    <div class="container-fluid">
+<div class="container-fluid">
         <p>Wellcome, <%=user.name %></p>
         <div class="container">
-            
+                <% if(documents.length ==0){ %>
+                    <div class="alert alert-primary" role="alert">
+                        <strong> You don't have any documents yet!</strong>
+                    </div>
+                    
+                    <%}else{%>
+                       <%documents.map(doc=>{ %>
+                       <ul class="list-group">
+                            <li class="list-group-item"><%= doc.name%></li>
+                       </ul>
+                    
+                       <%})%>
+                    <%}%>
         </div>
     </div>
+    
+
     
     
 </body>
