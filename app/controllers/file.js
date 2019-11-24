@@ -20,35 +20,39 @@ module.exports.new = async (app, req, res) => {
     var file = req.files.fileupload;
     var content = "";
     var rows = {};
-    async function printRows() {
-      content = "";
+    async function printRows(end) {
+    
       Object.keys(rows)
         .sort((y1, y2) => parseFloat(y1) - parseFloat(y2))
         .forEach(y => {
           content = content + (rows[y] || []).join(" ") + "\n";
         });
-      if (content) {
-        // await Document.create({
-        //   name: file.originalFilename,
-        //   content,
-        //   user
-        // });
-      }
+        if(end){
+          await Document.create({
+            name: file.originalFilename,
+            content,
+            user
+          });
+         res.status(200).redirect(301, "/home");
+        }
+
     }
     await fs.readFile(file.path, async (err, data) => {
       if (!err) {
-        content = data;
         if (file.originalFilename.includes(".pdf")) {
           new pdfreader.PdfReader().parseFileItems(file.path, (err, item) => {
-            if (item) {
-              if (!item || item.page) {
-                console.log(!item, item.page);
-                printRows();
+            if(!item){
+              printRows(true);
+              rows = {};
+            }else
+              if ( item.page) {
+                printRows(false);
+                rows = {};
               } else if (item.text)
                 (rows[item.y] = rows[item.y] || []).push(item.text);
-            }
+            
           });
-          return res.status(200).redirect(301, "/home");
+
         } else {
           await Document.create({
             name: file.originalFilename,
@@ -71,5 +75,5 @@ module.exports.new = async (app, req, res) => {
   }
 
   if (!user) res.status(400).send("Error,Please try again!");
-  return res.status(200).redirect(301, "/home");
+
 };
