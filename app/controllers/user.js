@@ -22,7 +22,6 @@ module.exports.register = async (app, req, res) => {
     .catch(err => console.log(err));
 };
 module.exports.login = async (app, req, res) => {
-
   const { email, password } = req.body;
   const user = await User.findOne({ email }).select("+password");
   if (!user)

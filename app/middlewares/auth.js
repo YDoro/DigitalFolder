@@ -3,9 +3,13 @@ const authConfig =  require('../../config/auth');
 module.exports= (req, res, next)=>{
     var authHeader = req.headers.authorization;
     if(!authHeader){
+        if(req.headers.cookie){
         var cookies = req.headers.cookie.split('=');
         for (let index = 0; index < cookies.length; index++) 
            if(cookies[index].includes('Bearer')) authHeader = decodeURI(cookies[index])
+        }else{
+          res.redirect("/");
+        }
     }
   
     if(!authHeader)

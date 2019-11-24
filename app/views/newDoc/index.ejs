@@ -35,12 +35,18 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script>
+    function filepicking(){
+        document.getElementById('labelFU').childNodes[0].data = document.getElementById('fileupload').value;
+        console.log(document.getElementById('fileupload'))
+    }
+    </script>
     <title>Create Dcoument</title>
   </head>
   <body>
       <div class="container-fluid">
           
-      <form action="/document/create" method="POST">
+      <form action="/document/create" enctype="multipart/form-data" method="POST">
         <div class="form-group">
           <label for="nameInput">Name</label>
           <input
@@ -54,6 +60,18 @@
         <div class="form-group">
           <label for="contentInput">Content</label>
           <textarea class="form-control" name="content" id="contentInput" rows="5"></textarea>
+        </div>
+        <div class="input-group">
+            <input  
+                class="custom-file-input" 
+                type="file" 
+                name="fileupload" 
+                value="fileupload" 
+                id="fileupload"
+                accept=".pdf,.txt,.json,.csv,.lst,.conf,"
+                onchange="filepicking()"
+                >
+            <label for="fileupload" id="labelFU"> Select a file to upload</label>
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
       </form>
