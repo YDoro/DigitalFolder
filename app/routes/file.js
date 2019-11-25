@@ -15,5 +15,7 @@ module.exports = (app)=>{
     app.post('/document/create',authMiddleware,multipartMiddleware,(req,res)=>{
       app.app.controllers.file.new(app, req, res);
     })
-
+    app.post('/document/remove/',authMiddleware,(req,res)=>{
+        app.app.controllers.file.delete(app, req, res);
+      })
 }

@@ -21,44 +21,41 @@ module.exports.new = async (app, req, res) => {
     var content = "";
     var rows = {};
     async function printRows(end) {
-    
       Object.keys(rows)
         .sort((y1, y2) => parseFloat(y1) - parseFloat(y2))
         .forEach(y => {
           content = content + (rows[y] || []).join(" ") + "\n";
         });
-        if(end){
-          await Document.create({
-            name: file.originalFilename,
-            content,
-            user
-          });
-         res.status(200).redirect(301, "/home");
-        }
-
+      if (end) {
+        await Document.create({
+          name: file.originalFilename,
+          content,
+          user
+        });
+        res.status(200).redirect(301, "/home");
+      }
     }
     await fs.readFile(file.path, async (err, data) => {
       if (!err) {
         if (file.originalFilename.includes(".pdf")) {
           new pdfreader.PdfReader().parseFileItems(file.path, (err, item) => {
-            if(!item){
+            if (!item) {
               printRows(true);
               rows = {};
-            }else
-              if ( item.page) {
-                printRows(false);
-                rows = {};
-              } else if (item.text)
-                (rows[item.y] = rows[item.y] || []).push(item.text);
-            
+            } else if (item.page) {
+              printRows(false);
+              rows = {};
+            } else if (item.text)
+              (rows[item.y] = rows[item.y] || []).push(item.text);
           });
-
         } else {
+
           await Document.create({
             name: file.originalFilename,
-            content,
+            content:data,
             user
           });
+          res.status(200).redirect(301, "/home");
         }
       } else {
         console.log(err);
@@ -75,5 +72,15 @@ module.exports.new = async (app, req, res) => {
   }
 
   if (!user) res.status(400).send("Error,Please try again!");
-
 };
+module.exports.delete = async (app,req,res)=>{
+  var doc = await Document.findById(req.body.id);
+  const user = await User.findById(req.userId);
+  if(user._id+'' === doc.user+''){  
+    await doc.remove();
+    res.status(200).redirect(301, "/home");
+
+} else{
+  res.status(403).send('Permission denied');
+}
+}
