@@ -17,7 +17,7 @@ module.exports.create = async (app, req, res) => {
   const user = await User.findById(req.userId);
 
   if (!user) res.status(400).send("Error,Please try again!");
-  res.render("../views/newDoc");
+  res.render("../views/document/create");
 };
 
 
@@ -101,6 +101,6 @@ module.exports.delete = async (app,req,res)=>{
 module.exports.view = async(app,req,res)=>{
   var doc = await Document.findById(req.params.docId).select('+content');
   const user = await User.findById(req.userId);
-  if(user._id+'' === doc.user+'')  res.render("../views/viewDoc",{doc});
+  if(user._id+'' === doc.user+'')  res.render("../views/document/view",{doc});
   else res.status(403).send('Permission denied');
 }
