@@ -111,7 +111,7 @@
                     >
                       Edit
                     </a>
-                    <form method="POST" action="/document/remove/">
+                    <form method="POST" action="/document/remove/"onSubmit="if(!confirm('Do you really want to delete <%=doc.name%>?')){return false;} ">
                       <input type="hidden" name="id" value="<%=doc._id%>" />
                       <button type="submit" class="btn btn-danger">
                         Delete
