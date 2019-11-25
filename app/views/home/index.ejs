@@ -14,8 +14,8 @@
       function newDocument() {
         window.location.href = "/document/create";
       }
-      function DocViewer(id){
-        window.location.href = "/document/view/"+id;
+      function DocViewer(id) {
+        window.location.href = "/document/view/" + id;
       }
     </script>
 
@@ -67,7 +67,9 @@
               +
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownId">
-              <a class="dropdown-item" href="#" onclick="newDocument()">New Document</a>
+              <a class="dropdown-item" href="#" onclick="newDocument()"
+                >New Document</a
+              >
               <a class="dropdown-item" href="#">New Folder</a>
             </div>
           </li>
@@ -81,6 +83,8 @@
           <thead>
             <tr>
               <th scope="col">Doc name</th>
+              <th scope="col">Created At</th>
+              <th scope="col">Modified At</th>
               <th scope="col">Options</th>
             </tr>
           </thead>
@@ -94,23 +98,36 @@
 
             <tr>
               <td><%= doc.name%></td>
-           
-            <td>
-            <div class="doc-controll">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary" onclick="DocViewer('<%=doc._id%>')">Read</button>
-                <button type="button" class="btn btn-secondary" >
-                  Edit
-                </button>
-                <form method="POST" action='/document/remove/'>
-                    <input type="hidden" name="id" value="<%=doc._id%>"/>
-                    <button type="submit"  class="btn btn-danger" >Delete</button>
 
+              <td><%= doc.createdAt.toLocaleString()%></td>
+              <td><%=doc.modifiedAt.toLocaleString()%></td>
+              <td>
+                <div class="doc-controll">
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="DocViewer('<%=doc._id%>')"
+                    >
+                      Read
+                    </button>
+                    <button type="button" class="btn btn-secondary">
+                      Edit
+                    </button>
+                    <form method="POST" action="/document/remove/">
+                      <input type="hidden" name="id" value="<%=doc._id%>" />
+                      <button type="submit" class="btn btn-danger">
+                        Delete
+                      </button>
                     </form>
-              </div>
-            </div>
-        </td>
-        </tr>
+                  </div>
+                </div>
+              </td>
+            </tr>
 
             <%})%> <%}%>
           </tbody>
