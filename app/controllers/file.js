@@ -1,17 +1,28 @@
 const User = require("../models/user");
 const Document = require("../models/document");
+
+
+
+//=============================================================================
 module.exports.home = async (app, req, res) => {
   const user = await User.findById(req.userId);
   const documents = await Document.find({ user: req.userId });
   if (!user) res.status(400).send("Error,Please try again!");
   res.render("../views/home", { user, documents });
 };
+
+
+//=============================================================================
 module.exports.create = async (app, req, res) => {
   const user = await User.findById(req.userId);
 
   if (!user) res.status(400).send("Error,Please try again!");
   res.render("../views/newDoc");
 };
+
+
+
+//=============================================================================
 module.exports.new = async (app, req, res) => {
   var fs = require("fs");
   var pdfreader = require("pdfreader");
@@ -24,7 +35,7 @@ module.exports.new = async (app, req, res) => {
       Object.keys(rows)
         .sort((y1, y2) => parseFloat(y1) - parseFloat(y2))
         .forEach(y => {
-          content = content + (rows[y] || []).join(" ") + "\n";
+          content = content+(rows[y] || []).join(" ") ;
         });
       if (end) {
         await Document.create({
@@ -46,7 +57,7 @@ module.exports.new = async (app, req, res) => {
               printRows(false);
               rows = {};
             } else if (item.text)
-              (rows[item.y] = rows[item.y] || []).push(item.text);
+              (rows[item.y] = rows[item.y] || []).push(item.text+'\n');
           });
         } else {
 
@@ -73,6 +84,8 @@ module.exports.new = async (app, req, res) => {
 
   if (!user) res.status(400).send("Error,Please try again!");
 };
+
+//=============================================================================
 module.exports.delete = async (app,req,res)=>{
   var doc = await Document.findById(req.body.id);
   const user = await User.findById(req.userId);
@@ -83,4 +96,11 @@ module.exports.delete = async (app,req,res)=>{
 } else{
   res.status(403).send('Permission denied');
 }
+}
+//=============================================================================
+module.exports.view = async(app,req,res)=>{
+  var doc = await Document.findById(req.params.docId).select('+content');
+  const user = await User.findById(req.userId);
+  if(user._id+'' === doc.user+'')  res.render("../views/viewDoc",{doc});
+  else res.status(403).send('Permission denied');
 }

@@ -14,8 +14,8 @@
       function newDocument() {
         window.location.href = "/document/create";
       }
-      function deleteDoc(docId){
-        window.location.href = "/document/remove/"+docId;
+      function DocViewer(id){
+        window.location.href = "/document/view/"+id;
       }
     </script>
 
@@ -67,7 +67,7 @@
               +
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownId">
-              <a class="dropdown-item" onclick="newDocument()">New Document</a>
+              <a class="dropdown-item" href="#" onclick="newDocument()">New Document</a>
               <a class="dropdown-item" href="#">New Folder</a>
             </div>
           </li>
@@ -98,8 +98,8 @@
             <td>
             <div class="doc-controll">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary">Read</button>
-                <button type="button" class="btn btn-secondary">
+                <button type="button" class="btn btn-primary" onclick="DocViewer('<%=doc._id%>')">Read</button>
+                <button type="button" class="btn btn-secondary" >
                   Edit
                 </button>
                 <form method="POST" action='/document/remove/'>
