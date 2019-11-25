@@ -10,12 +10,6 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <script>
-      function DocViewer(id) {
-        window.location.href = "/document/view/" + id;
-      }
-    </script>
-
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -103,16 +97,20 @@
                     role="group"
                     aria-label="Basic example"
                   >
-                    <button
-                      type="button"
+                    <a
+                      role="button"
                       class="btn btn-primary"
-                      onclick="DocViewer('<%=doc._id%>')"
+                      href="/document/view/<%=doc._id%>"
                     >
                       Read
-                    </button>
-                    <button type="button" class="btn btn-secondary">
+                    </a>
+                    <a 
+                    role="button" 
+                    class="btn btn-secondary"
+                    href="/document/edit/<%=doc._id%>"
+                    >
                       Edit
-                    </button>
+                    </a>
                     <form method="POST" action="/document/remove/">
                       <input type="hidden" name="id" value="<%=doc._id%>" />
                       <button type="submit" class="btn btn-danger">

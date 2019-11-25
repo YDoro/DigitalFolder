@@ -19,4 +19,10 @@ module.exports = app => {
   app.get("/document/view/:docId",authMiddleware,(req,res)=>{
     app.app.controllers.file.view(app, req, res);
   });
+  app.get("/document/edit/:docId",authMiddleware,(req,res)=>{
+    app.app.controllers.file.edit(app, req, res);
+  });
+  app.post("/document/edit/",authMiddleware,(req,res)=>{
+    app.app.controllers.file.save(app, req, res);
+  });
 };
