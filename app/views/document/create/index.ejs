@@ -37,10 +37,13 @@
     ></script>
     <script>
       function filepicking() {
-        document.getElementById(
+ var name =   document.getElementById("fileupload").value.split('\\');
+ name = name[name.length-1]
+
+   document.getElementById(
           "labelFU"
-        ).childNodes[0].data = document.getElementById("fileupload").value;
-        console.log(document.getElementById("fileupload"));
+        ).childNodes[0].data = name;
+     
       }
 
     </script>
