@@ -13,7 +13,7 @@ const DocSchema = new mongoose.Schema({
         type:String,
         select:false
     },
-    modifyedAt:{
+    modifiedAt:{
      type:Date,
      default:Date.now()
     },
