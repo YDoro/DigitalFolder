@@ -74,6 +74,8 @@
     <div class="container-fluid">
          <h5 class="card-title"><%=doc.name%></h5>
         <h6 class="card-subtitle mb-2 text-muted">Created at, <%= doc.createdAt%></h6>
+        <h6 class="text-muted">Modified at, <%= doc.modifiedAt%></h6>
+
         <div class="container"  style="white-space: pre-line">
                 <%=doc.content%>
         </div>
