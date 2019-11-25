@@ -11,7 +11,6 @@ module.exports.home = async (app, req, res) => {
   res.render("../views/home", { user, documents });
 };
 
-
 //=============================================================================
 module.exports.create = async (app, req, res) => {
   const user = await User.findById(req.userId);
@@ -19,8 +18,6 @@ module.exports.create = async (app, req, res) => {
   if (!user) res.status(400).send("Error,Please try again!");
   res.render("../views/document/create");
 };
-
-
 
 //=============================================================================
 module.exports.new = async (app, req, res) => {
@@ -97,6 +94,7 @@ module.exports.delete = async (app,req,res)=>{
   res.status(403).send('Permission denied');
 }
 }
+
 //=============================================================================
 module.exports.view = async(app,req,res)=>{
   var doc = await Document.findById(req.params.docId).select('+content');
@@ -104,11 +102,14 @@ module.exports.view = async(app,req,res)=>{
   if(user._id+'' === doc.user+'')  res.render("../views/document/view",{doc});
   else res.status(403).send('Permission denied');
 }
+
 //=============================================================================
 module.exports.edit = async (app,req,res)=>{
   const doc = await Document.findById(req.params.docId).select('+content');
-  res.render("../views/document/edit",{doc})
+  res.render("../views/document/edit",{doc,error:null})
 }
+
+//=============================================================================
 module.exports.save = async (app,req,res)=>{
   var doc = await Document.findById(req.body.docId).select('+content');
   const user = await User.findById(req.userId);

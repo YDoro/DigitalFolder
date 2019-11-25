@@ -23,6 +23,14 @@ module.exports = app => {
     app.app.controllers.file.edit(app, req, res);
   });
   app.post("/document/edit/",authMiddleware,(req,res)=>{
-    app.app.controllers.file.save(app, req, res);
+    if(req.body.name)  app.app.controllers.file.save(app, req, res);
+    else res.render("../views/document/edit", { error: "field name cannot be empty", 
+    doc:{
+      _id:req.body.docId,
+      name:req.body.name,
+      content:req.body.content
+    },
+    
+  });
   });
 };

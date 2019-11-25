@@ -76,6 +76,12 @@
             </ul>
           </div>
         </nav>
+        <% if(error){ %>
+            <div class="alert alert-danger">
+              <strong>Error!</strong>
+              <p><%=error %></p>
+            </div>
+            <%}%>
     <div class="container">
       <form
         action="/document/edit/"
