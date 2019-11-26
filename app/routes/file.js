@@ -10,8 +10,12 @@ module.exports = app => {
     app.app.controllers.file.create(app, req, res);
   });
   app.post("/document/create",authMiddleware,multipartMiddleware,(req, res) => {
-      app.app.controllers.file.new(app, req, res);
-    }
+    if (req.body.name) 
+          app.app.controllers.file.new(app, req, res);
+    else 
+        res.render("../views/document/create", { error: "field name cannot be empty"})
+
+  }
   );
   app.post("/document/remove/", authMiddleware, (req, res) => {
     app.app.controllers.file.delete(app, req, res);

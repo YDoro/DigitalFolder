@@ -1,5 +1,4 @@
 const mongoose = require('../../config/database');
-//TODO field last change
 module.exports = () =>{
 const FolderSchema = new mongoose.Schema({
     

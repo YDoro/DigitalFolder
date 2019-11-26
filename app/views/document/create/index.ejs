@@ -90,6 +90,12 @@
           </div>
         </nav>
     <div class="container">
+        <% if(error){ %>
+          <div class="alert alert-danger">
+            <strong>Error!</strong>
+            <p><%=error %></p>
+          </div>
+          <%}%>
       <form
         action="/document/create"
         enctype="multipart/form-data"

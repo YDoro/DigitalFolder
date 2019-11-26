@@ -16,7 +16,7 @@ module.exports.create = async (app, req, res) => {
   const user = await User.findById(req.userId);
 
   if (!user) res.status(400).send("Error,Please try again!");
-  res.render("../views/document/create");
+  res.render("../views/document/create",{error:null});
 };
 
 //=============================================================================
@@ -57,7 +57,6 @@ module.exports.new = async (app, req, res) => {
               (rows[item.y] = rows[item.y] || []).push(item.text+'\n');
           });
         } else {
-
           await Document.create({
             name: file.originalFilename,
             content:data,
@@ -70,13 +69,13 @@ module.exports.new = async (app, req, res) => {
       }
     });
   } else {
-    if (req.body.name.replace(" ", "") != "") {
+  
       await Document.create({
         name: req.body.name,
         content: req.body.content,
         user
       });
-    }
+      res.status(200).redirect(301, "/home");
   }
 
   if (!user) res.status(400).send("Error,Please try again!");
